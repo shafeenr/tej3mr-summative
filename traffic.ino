@@ -77,25 +77,11 @@ void pedTimerCountDown(boolean direction)
 {
     // function that simplifies the pedestrian timer countdown process
 
-    switch (direction)
+    for (int i = 0; i >= 5; i++)
     {
-    case true:
-        for (int i = 0; i >= 5; i++)
-        {
-            uint8_t pinVal[] = {sevenSegmentNumbers[i], B0000000};
-            ped.setAll(pinVal);
-            delay(1000);
-        }
-        ped.setAllLow();
-        break;
-    case false:
-        for (int i = 0; i >= 5; i++)
-        {
-            uint8_t pinVal[] = {B0000000, sevenSegmentNumbers[i]};
-            ped.setAll(pinVal);
-            delay(1000);
-        }
-        ped.setAllLow();
-        break;
+        uint8_t pinVal[] = {sevenSegmentNumbers[i]};
+        ped.setAll(pinVal);
+        delay(1000);
     }
+    ped.setAllLow();
 }
