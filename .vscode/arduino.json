@@ -1,4 +1,4 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "intersection.ino"
+    "sketch": "traffic.ino"
 }
