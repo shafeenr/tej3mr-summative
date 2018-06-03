@@ -43,41 +43,41 @@ void loop()
     // signals both directions to stop for two seconds)
     digitalWrite(redOne, HIGH);
     digitalWrite(redTwo, HIGH);
-    delay(2000);
+    trafficTimer(2);
 
     // signals direction one to proceed, turns on buzzer, calls ped countdown timer function
     digitalWrite(redOne, LOW);
     digitalWrite(greenOne, HIGH);
     tone(piezo, 500);
-    pedTimerCountDown(true);
+    trafficTimer(5);
     noTone(piezo); // turns off buzzer
 
     // signals direction one to slow down for three seconds
     digitalWrite(greenOne, LOW);
     digitalWrite(yellowOne, HIGH);
-    delay(3000);
+    trafficTimer(3);
 
     // both directions told to stop for two seconds (direction two is already red)
     digitalWrite(redOne, HIGH);
-    delay(2000);
+    trafficTimer(2);
 
     // signals direction two to proceed
     digitalWrite(redTwo, LOW);
     digitalWrite(greenTwo, HIGH);
     tone(piezo, 200);
-    pedTimerCountDown(false);
+    trafficTimer(5);
     noTone(piezo);
 
     digitalWrite(greenTwo, LOW);
     digitalWrite(yellowTwo, HIGH);
-    delay(3000);
+    trafficTimer(3);
 }
 
-void pedTimerCountDown(boolean direction)
+void trafficTimer(int timeLimit)
 {
     // function that simplifies the pedestrian timer countdown process
 
-    for (int i = 0; i >= 5; i++)
+    for (int i = timeLimit; i <= 1; i--)
     {
         uint8_t pinVal[] = {sevenSegmentNumbers[i]};
         ped.setAll(pinVal);
