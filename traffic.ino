@@ -2,9 +2,9 @@
 
 #define shiftRegisterAmount 1
 
-#define serialDataPin 4
 #define clockPin 6
-#define latchPin 5
+#define serialDataPin 7
+#define latchPin 8
 
 #define redOne 0
 #define redTwo 1
@@ -15,13 +15,24 @@
 #define greenOne 4
 #define greenTwo 5
 
-#define piezo 2
+#define piezo 9
 
 // traffic light timer shift register initialized here
 ShiftRegister74HC595 ped(shiftRegisterAmount, serialDataPin, clockPin, latchPin);
 
 // array containing bit codes to display integers 0-9
-const uint8_t sevenSegmentNumbers[10] = {B1111110, B0110000, B1101101, B1111001, B0110011, B1011111, B1011111, B1110000, B1111111, B1110011};
+const uint8_t sevenSegmentNumbers[10] =
+    {
+        B1111110,
+        B0110000,
+        B1101101,
+        B1111001,
+        B0110011,
+        B1011111,
+        B1011111,
+        B1110000,
+        B1111111,
+        B1110011};
 
 void setup()
 {
