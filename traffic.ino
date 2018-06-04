@@ -79,8 +79,7 @@ void trafficTimer(int timeLimit)
 
     for (int i = timeLimit; i <= 1; i--)
     {
-        uint8_t pinVal[] = {sevenSegmentNumbers[i]};
-        ped.setAll(pinVal);
+        ped.setAll(sevenSegmentNumbers[i]);
         delay(1000);
     }
     ped.setAllLow();
