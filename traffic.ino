@@ -1,6 +1,7 @@
-#include <ShiftRegister74HC595.h>
-#include <BCDDecoderDriver74LS47.h>
+#include <ShiftRegister74HC595.h> // not my library, used to simplify shift register usage
+#include <BCDDecoderDriver74LS47.h> // my library, incredibly primitive but allows for each IC to be used as an object
 
+//define instead of constant integers to save on memory
 #define shiftRegisterAmount 1
 
 #define pinA 9
@@ -24,6 +25,7 @@
 
 #define piezo 9
 
+// pedestrian IC controller initialized here
 BCDDecoderDriver74LS47 ped(pinA, pinB, pinC, pinD, pinRBI);
 
 // traffic light timer shift register initialized here
