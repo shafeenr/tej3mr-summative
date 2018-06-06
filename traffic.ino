@@ -6,11 +6,11 @@
 //define instead of constant integers to save on memory
 #define shiftRegisterAmount 1
 
-#define pinA 9
+/*#define pinA 9
 #define pinB 10
 #define pinC 11
 #define pinD 12
-#define pinRBI 13
+#define pinRBI 13*/
 
 #define clockPin 6
 #define serialDataPin 7
