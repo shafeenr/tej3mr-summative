@@ -1,6 +1,13 @@
 #include <ShiftRegister74HC595.h>
+#include <BCDDecoderDriver74LS47.h>
 
 #define shiftRegisterAmount 1
+
+#define pinA 9
+#define pinB 10
+#define pinC 11
+#define pinD 12
+#define pinRBI 13
 
 #define clockPin 6
 #define serialDataPin 7
@@ -17,59 +24,48 @@
 
 #define piezo 9
 
-// traffic light timer shift register initialized here
-ShiftRegister74HC595 ped(shiftRegisterAmount, serialDataPin, clockPin, latchPin);
+BCDDecoderDriver74LS47 ped(pinA, pinB, pinC, pinD, pinRBI);
 
-// array containing bit codes to display integers 0-9
-const uint8_t sevenSegmentNumbers[10] =
-    {
-        B1111110,
-        B0110000,
-        B1101101,
-        B1111001,
-        B0110011,
-        B1011111,
-        B1011111,
-        B1110000,
-        B1111111,
-        B1110011};
+// traffic light timer shift register initialized here
+ShiftRegister74HC595 trafficLight(shiftRegisterAmount, serialDataPin, clockPin, latchPin);
 
 void setup()
 {
+    ped.display(true);
 }
 
 void loop()
 {
     // signals both directions to stop for two seconds)
-    digitalWrite(redOne, HIGH);
-    digitalWrite(redTwo, HIGH);
+    trafficLight.set(redOne, HIGH);
+    trafficLight.set(redTwo, HIGH);
     trafficTimer(2);
 
     // signals direction one to proceed, turns on buzzer, calls ped countdown timer function
-    digitalWrite(redOne, LOW);
-    digitalWrite(greenOne, HIGH);
+    trafficLight.set(redOne, LOW);
+    trafficLight.set(greenOne, HIGH);
     tone(piezo, 500);
     trafficTimer(5);
     noTone(piezo); // turns off buzzer
 
     // signals direction one to slow down for three seconds
-    digitalWrite(greenOne, LOW);
-    digitalWrite(yellowOne, HIGH);
+    trafficLight.set(greenOne, LOW);
+    trafficLight.set(yellowOne, HIGH);
     trafficTimer(3);
 
     // both directions told to stop for two seconds (direction two is already red)
-    digitalWrite(redOne, HIGH);
+    trafficLight.set(redOne, HIGH);
     trafficTimer(2);
 
     // signals direction two to proceed
-    digitalWrite(redTwo, LOW);
-    digitalWrite(greenTwo, HIGH);
+    trafficLight.set(redTwo, LOW);
+    trafficLight.set(greenTwo, HIGH);
     tone(piezo, 200);
     trafficTimer(5);
     noTone(piezo);
 
-    digitalWrite(greenTwo, LOW);
-    digitalWrite(yellowTwo, HIGH);
+    trafficLight.set(greenTwo, LOW);
+    trafficLight.set(yellowTwo, HIGH);
     trafficTimer(3);
 }
 
@@ -79,8 +75,8 @@ void trafficTimer(int timeLimit)
 
     for (int i = timeLimit; i <= 1; i--)
     {
-        ped.setAll(sevenSegmentNumbers[i]);
+        ped.setNumber(i);
         delay(1000);
     }
-    ped.setAllLow();
+    ped.setNumber(0);
 }
