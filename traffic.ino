@@ -86,7 +86,7 @@ void trafficTimer(int timeLimit)
 {
     // function that simplifies the pedestrian timer countdown process
 
-    for (int i = timeLimit; i <= 1; i--)
+    for (int i = timeLimit; i >= 1; i--)
     {
         ped.setNumber(i);
         ped.refreshDisplay();
@@ -94,4 +94,5 @@ void trafficTimer(int timeLimit)
     }
     ped.setNumber(0);
     ped.refreshDisplay();
+    delay(2000);
 }
