@@ -5,9 +5,9 @@
 //define instead of constant integers to save on memory
 #define shiftRegisterAmount 1
 
-#define clockPin 6
-#define serialDataPin 7
-#define latchPin 8
+#define clockPin 10
+#define serialDataPin 11
+#define latchPin 12
 
 #define redOne 0
 #define redTwo 1
@@ -18,7 +18,7 @@
 #define greenOne 4
 #define greenTwo 5
 
-#define piezo 9
+#define piezo 1
 
 // pedestrian object initialized here
 SevSeg ped;
