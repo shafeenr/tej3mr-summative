@@ -30,12 +30,12 @@ void trafficTimer(int timeLimit);
 
 void setup()
 {
+    byte hardwareConfig = COMMON_CATHODE;
     byte numDigits = 1;
     byte digitPins[] = {};
     byte segmentPins[] = {6, 5, 2, 3, 4, 7, 8, 9};
     bool resistorsOnSegments = true;
 
-    byte hardwareConfig = COMMON_CATHODE;
     ped.begin(hardwareConfig, numDigits, digitPins, segmentPins, resistorsOnSegments);
     ped.setBrightness(90);
 }
