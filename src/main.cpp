@@ -1,16 +1,9 @@
-#include <SevSeg.h>
-
-#include <ShiftRegister74HC595.h> // not my library, used to simplify shift register usage
-//#include <BCDDecoderDriver74LS47.h> // my library, incredibly primitive but allows for each IC to be used as an object
+#include "Arduino.h"
+#include "SevSeg.h"
+#include "ShiftRegister74HC595.h"
 
 //define instead of constant integers to save on memory
 #define shiftRegisterAmount 1
-
-/*#define pinA 9
-#define pinB 10
-#define pinC 11
-#define pinD 12
-#define pinRBI 13*/
 
 #define clockPin 6
 #define serialDataPin 7
@@ -27,22 +20,22 @@
 
 #define piezo 9
 
-// pedestrian IC controller initialized here
-//BCDDecoderDriver74LS47 ped(pinA, pinB, pinC, pinD, pinRBI);
+// pedestrian object initialized here
 SevSeg ped;
 
 // traffic light timer shift register initialized here
 ShiftRegister74HC595 trafficLight(shiftRegisterAmount, serialDataPin, clockPin, latchPin);
 
+void trafficTimer(int timeLimit);
+
 void setup()
 {
-    //ped.display(true);
     byte numDigits = 1;
     byte digitPins[] = {};
     byte segmentPins[] = {6, 5, 2, 3, 4, 7, 8, 9};
     bool resistorsOnSegments = true;
 
-    byte hardwareConfig = COMMON_CATHODE; 
+    byte hardwareConfig = COMMON_CATHODE;
     ped.begin(hardwareConfig, numDigits, digitPins, segmentPins, resistorsOnSegments);
     ped.setBrightness(90);
 }
